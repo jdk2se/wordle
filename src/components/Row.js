@@ -22,7 +22,7 @@ export default function ({ guess, currentGuess }) {
         ))}
 
         {[...Array(5 - letters.length)].map((_, index) => {
-          return <div key="index"></div>
+          return <div key={index}></div>
         })}
       </div>
     )

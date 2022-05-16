@@ -6,6 +6,7 @@ const useWorlds = (solution) => {
     const [history, setHistory]           = useState(['hello', 'world']);
     const [isCorrect, setIsCorrect]       = useState(false);
     const [currentGuess, setCurrentGuess] = useState('');
+    const [usedKeys, setUsedKeys]         = useState({}); // {z: 'green'}
 
     /**
      * format a guess into an array of letters
@@ -20,7 +21,7 @@ const useWorlds = (solution) => {
         formattedGuess.forEach((el, i) => {
             if (solutionArray[i] === el.key) {
                 formattedGuess[i].color = 'green';
-                solutionArray[i] = null;
+                solutionArray [i]       = null;
             }
         });
 
@@ -29,11 +30,10 @@ const useWorlds = (solution) => {
             solutionArray.forEach((letter, j) => {
                 if (letter === el.key) {
                     formattedGuess[i].color = 'yellow';
-                    solutionArray[j] = null;
+                    solutionArray [j]       = null;
                 }
             });
-        });
-        console.log(formattedGuess);//todo 
+        });        
 
         return formattedGuess;
     }
@@ -49,8 +49,8 @@ const useWorlds = (solution) => {
         }
 
         setGuesses((prevGuesses) => {
-            const newGuesses = [...prevGuesses];
-            newGuesses[turn] = formattedGuess;
+            const      newGuesses = [...prevGuesses];
+            newGuesses[turn]      = formattedGuess;
 
             return newGuesses;
         });
@@ -61,6 +61,34 @@ const useWorlds = (solution) => {
 
         setTurn((prevTurn) => {
             return prevTurn + 1;
+        });
+
+        setUsedKeys((prevKeys) => {
+            const newKeys = {...prevKeys};
+
+            formattedGuess.forEach((letter) => {
+                const currentColor = newKeys[letter.key];
+
+                if (letter.color === 'green') {
+                    newKeys[letter.key] = 'green';
+
+                    return;
+                }
+
+                if (letter.color === 'yellow' && currentColor !== 'green') {
+                    newKeys[letter.key] = 'yellow';
+
+                    return;
+                }
+
+                if (letter.color === 'grey' && currentColor !== 'green' && currentColor !== 'yellow') {
+                    newKeys[letter.key] = 'grey';
+
+                    return;
+                }
+            });
+
+            return newKeys;
         });
 
         setCurrentGuess('');
@@ -114,7 +142,7 @@ const useWorlds = (solution) => {
         }
     }
 
-    return {turn, currentGuess, guesses, isCorrect, handleKeyup}
+    return {turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup}
 }
 
 export default useWorlds;
