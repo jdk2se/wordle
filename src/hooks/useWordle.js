@@ -110,6 +110,7 @@ const useWorlds = (solution) => {
             // do not allow duplicate words
             if (history.includes(currentGuess)) {
                 console.log('you already tried that word');
+                // setCurrentGuess(''); TODO add to info block
 
                 return;
             }
