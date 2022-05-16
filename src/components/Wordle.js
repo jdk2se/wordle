@@ -12,13 +12,12 @@ export default function Wordle({ solution }) {
   }, [handleKeyup]);
 
   useEffect(() => {
-    console.log(guesses, turn, isCorrect);
+    // console.log(guesses, turn, isCorrect); TODO
   }, [guesses, turn, isCorrect]);
 
   return (
     <div>
         <div>solution - {solution}</div>
-        <div>current guess - {currentGuess}</div>
         <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
     </div>  
   )

@@ -33,6 +33,7 @@ const useWorlds = (solution) => {
                 }
             });
         });
+        console.log(formattedGuess);//todo 
 
         return formattedGuess;
     }
@@ -49,7 +50,7 @@ const useWorlds = (solution) => {
 
         setGuesses((prevGuesses) => {
             const newGuesses = [...prevGuesses];
-            newGuesses[turn] =formattedGuess;
+            newGuesses[turn] = formattedGuess;
 
             return newGuesses;
         });
@@ -93,7 +94,7 @@ const useWorlds = (solution) => {
             }
 
             const colorized = formatGuess();
-            console.log(colorized);
+            addNewGuess(colorized);
         }
 
         if (key === 'Backspace') {
