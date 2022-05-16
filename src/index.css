@@ -32,16 +32,86 @@ h1 {
 }
 
 .row > .green {
-  background  : #0fe90f;
-  border-color: #0fe90f;
+  --background  : #0fe90f;
+  --border-color: #0fe90f;
+  animation     : flip .5s ease forwards;
 }
 
 .row > .grey {
-  background  : #525151;
-  border-color: #525151;
+  --background  : #525151;
+  --border-color: #525151;
+  animation     : flip .5s ease forwards;
 }
 
 .row > .yellow {
-  background  : yellow;
-  border-color: yellow;
+  --background  : rgb(230, 156, 19);
+  --border-color: rgb(230, 156, 19);
+  animation     : flip .5s ease forwards;
+}
+
+.row > div:nth-child(2) {
+  animation-delay: .2s;
+}
+
+.row > div:nth-child(3) {
+  animation-delay: .4s;
+}
+
+.row > div:nth-child(4) {
+  animation-delay: .6s;
+}
+
+.row > div:nth-child(5) {
+  animation-delay: .8s;
+}
+
+.current > .filled {
+  animation: typing .2 ease-in-out forwards;
+}
+
+/*
+ * animate
+*/
+@keyframes flip {
+  0% {
+    background: #fff;
+    border    : #333;
+    transform : rotateX(0);
+  }
+
+  45% {
+    background: #fff;
+    border    : #333;
+    transform : rotateX(90deg);
+  }
+
+  55% {
+    background  : var(--background);
+    border-color: var(--border-color);
+    transform   : rotateX(90deg);
+    color       : #fff;
+  }
+
+  100% {
+    background  : var(--background);
+    border-color: var(--border-color);
+    transform   : rotateX(0);
+    color       : #eee;
+  }
+}
+
+@keyframes typing {
+    0% {
+      transform   : scale(1);
+      border-color: #ddd;
+    }
+
+    50% {
+      transform: scale(1.2);
+    }
+
+    100% {
+      transform   : scale(1);
+      border-color: #333;
+    }
 }
